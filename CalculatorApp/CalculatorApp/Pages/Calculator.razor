@@ -1,0 +1,59 @@
+﻿@page "/"
+@inject IToastService toastService
+<h1>Calculator</h1>
+
+@if (Result == null)
+{
+    <div class="spinner"></div>
+}
+
+else
+{
+    <input @bind="Result" type="text" />
+
+    <hr />
+
+    <h2>Toast Demo</h2>
+
+    <button class="btn btn-info" @onclick="@(() => toastService.ShowInfo(" INFO message "))">Info Toast</button>
+    <button class="btn btn-success" @onclick="@(() => toastService.ShowSuccess(" SUCCESS message with a custom title ", " Congratulations! "))">Success Toast</button>
+    <button class="btn btn-warning" @onclick="@(() => toastService.ShowWarning(" WARNING message "))">Warning Toast</button>
+    <button class="btn btn-danger" @onclick="@(() => toastService.ShowError(" ERROR message "))">Error Toast</button>
+
+    <tr></tr>
+
+    <button class="btn btn-secondary" @onclick="ClearAll"> C </button>
+    <button class="btn btn-secondary" @onclick="ClearOne"> -> </button>
+    <button class="btn btn-secondary" @onclick="@(e => Operand("+"))"> + </button>
+    <button class="btn btn-secondary" @onclick="@(e => PerformCustomOperation(CustomOperations.Sqrt))">Sqrt</button>
+
+    <tr></tr>
+
+    <button class="btn btn-primary" @onclick="@(e => Number("1"))"> 1 </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("2"))"> 2 </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("3"))"> 3 </button>
+    <button class="btn btn-secondary" @onclick="@(e => Operand("-"))">-</button>
+    <button class="btn btn-secondary" @onclick="@(e => PerformCustomOperation(CustomOperations.Sin))">Sin</button>
+
+    <tr></tr>
+
+    <button class="btn btn-primary" @onclick="@(e => Number("4"))"> 4 </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("5"))"> 5 </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("6"))"> 6 </button>
+    <button class="btn btn-secondary" @onclick="@(e => Operand("*"))"> * </button>
+    <button class="btn btn-secondary" @onclick="@(e => PerformCustomOperation(CustomOperations.Cos))">Cos</button>
+
+    <tr></tr>
+
+    <button class="btn btn-primary" @onclick="@(e => Number("7"))"> 7 </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("8"))"> 8</button>
+    <button class="btn btn-primary" @onclick="@(e => Number("9"))"> 9 </button>
+    <button class="btn btn-secondary" @onclick="@(e => Number("/"))"> / </button>
+    <button class="btn btn-secondary" @onclick="@(e => PerformCustomOperation(CustomOperations.Tan))">Tan</button>
+
+    <tr></tr>
+    <button class="btn btn-primary" @onclick="@(e => Number("."))"> . </button>
+    <button class="btn btn-primary" @onclick="@(e => Number("0"))"> 0 </button>
+    <button class="btn btn-secondary" @onclick="Calculate"> = </button>
+    <button class="btn btn-secondary" @onclick="@(e => PerformCustomOperation(CustomOperations.Log))">Log</button>
+}
